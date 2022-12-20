@@ -5,6 +5,7 @@ from sklearn.preprocessing import MinMaxScaler
 import streamlit as st
 import requests
 import urllib.parse
+from PIL import Image
 
 # models = joblib.load('redrakor.joblib')
 df = pd.read_csv('tb_redrakor.csv', index_col=None)
@@ -45,8 +46,7 @@ def run():
       prediction.append(df.iloc[rank]['judul'])
         
     pred = df[df['judul'].isin(pd.Series(prediction))]
-    print(pred)
-
+  
     if st.button("Berikan saya rekomendasi drakor"):
         for index, data in pred.iterrows():
           poster = fetch_poster(data['judul'])
@@ -56,7 +56,8 @@ def run():
             st.text(data['judul'])
             st.write('Lihat selengkapnya {}'.format(link))
           else:
-            st.image(poster)
+            image = Image.open(poster)
+            st.image(image)
             st.text(data['judul'])
             st.write('Lihat selengkapnya {}'.format(link))
 
