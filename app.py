@@ -5,7 +5,6 @@ from sklearn.preprocessing import MinMaxScaler
 import streamlit as st
 import requests
 import urllib.parse
-from PIL import Image
 
 # models = joblib.load('redrakor.joblib')
 df = pd.read_csv('tb_redrakor.csv', index_col=None)
@@ -56,8 +55,7 @@ def run():
             st.text(data['judul'])
             st.write('Lihat selengkapnya {}'.format(link))
           else:
-            image = Image.open(poster)
-            st.image(image)
+            st.image(poster)
             st.text(data['judul'])
             st.write('Lihat selengkapnya {}'.format(link))
 
